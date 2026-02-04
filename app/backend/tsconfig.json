@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "target": "es2020",               /*versão moderna do nodejs*/
+    "module": "commonjs",             /*padrão*/
+    "lib": ["es6"],                   /*libs básicas*/
+    "allowJs": true,
+    "outDir": "dist",                 /*onde fica o cod compilado*/
+    "rootDir": "src",                 /*onde fica o cod font*/
+    "strict": true,                   /*evitar bugs*/
+    "noImplicitAny": true,
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules"]
+}

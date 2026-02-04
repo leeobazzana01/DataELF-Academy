@@ -1,0 +1,84 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+//iremos modelar os dados
+
+//modelagem do aluno
+model User {
+  id        String         @id @default(uuid()) //ID unico 
+  email     String         @unique              //email q sera a chave do login
+  createdAt DateTime       @default(now())      //data d cadastro
+
+  //lista de capitulos q ja completou
+  progress  UserProgress[] 
+}
+
+//grandes areas, pilares de DS (mat, prog, ml, etc)
+model Concept {
+  id          String   @id //o id manual inserido ("math)"
+  title       String
+  description String
+  iconName    String   //nome do icone p front buscar
+  color       String   //cor do texto
+  bgGradient  String   //gradient do card
+  
+  books       Book[]   //uma area tem varios livros
+}
+
+//modelo d livros
+model Book {
+  id        String    @id //id livro: "python-fluente"
+  title     String
+  author    String
+  emoji     String    //icone simples
+  
+  conceptId String    //ao pilar q pertence
+  concept   Concept   @relation(fields: [conceptId], references: [id])
+  
+  chapters  Chapter[] //capitulos q o livro tem
+}
+
+//capitulos (aulas)
+model Chapter {
+  id          String         @id @default(uuid())
+  titlePt     String         //titulo em ptbr
+  titleEn     String         //tituo Ing
+  videoId     String         //ID do YouTube (dps do = na url)
+  duration    String         //string d duracao em minutos
+  order       Int            //p ordenar os capitulos
+  
+  bookId      String
+  book        Book           @relation(fields: [bookId], references: [id])
+  
+  //campo p qm ja viu a aula
+  usersCompleted UserProgress[]
+}
+
+//tabela de relacao entre quais usuarios viram as aulas
+model UserProgress {
+  id        String   @id @default(uuid())
+  
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  
+  chapterId String
+  chapter   Chapter  @relation(fields: [chapterId], references: [id])
+  
+  completedAt DateTime @default(now())
+
+  //p um usuario n completar a msma aula 2x
+  @@unique([userId, chapterId])
+}
+

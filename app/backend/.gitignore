@@ -1,0 +1,16 @@
+#dependencias 
+node_modules/
+
+#seguranca
+.env
+.env.local
+.env.test
+
+#arqvos gerados
+dist/
+build/
+coverage/
+
+#logs e arquivos de Sistema
+*.log
+.DS_Store.env

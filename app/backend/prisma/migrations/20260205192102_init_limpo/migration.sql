@@ -1,17 +1,9 @@
 -- CreateTable
-CREATE TABLE "User" (
-    "id" TEXT NOT NULL,
-    "email" TEXT NOT NULL,
-    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-
-    CONSTRAINT "User_pkey" PRIMARY KEY ("id")
-);
-
--- CreateTable
 CREATE TABLE "Concept" (
     "id" TEXT NOT NULL,
     "title" TEXT NOT NULL,
     "description" TEXT NOT NULL,
+    "fullDescription" TEXT,
     "iconName" TEXT NOT NULL,
     "color" TEXT NOT NULL,
     "bgGradient" TEXT NOT NULL,
@@ -23,8 +15,9 @@ CREATE TABLE "Concept" (
 CREATE TABLE "Book" (
     "id" TEXT NOT NULL,
     "title" TEXT NOT NULL,
-    "author" TEXT NOT NULL,
-    "emoji" TEXT NOT NULL,
+    "author" TEXT,
+    "emoji" TEXT,
+    "coverImage" TEXT,
     "conceptId" TEXT NOT NULL,
 
     CONSTRAINT "Book_pkey" PRIMARY KEY ("id")
@@ -34,13 +27,22 @@ CREATE TABLE "Book" (
 CREATE TABLE "Chapter" (
     "id" TEXT NOT NULL,
     "titlePt" TEXT NOT NULL,
-    "titleEn" TEXT NOT NULL,
-    "videoId" TEXT NOT NULL,
-    "duration" TEXT NOT NULL,
-    "order" INTEGER NOT NULL,
+    "titleEn" TEXT,
+    "youtubeId" TEXT,
+    "duration" TEXT,
+    "order" INTEGER NOT NULL DEFAULT 0,
     "bookId" TEXT NOT NULL,
 
     CONSTRAINT "Chapter_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "User" (
+    "id" TEXT NOT NULL,
+    "email" TEXT NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT "User_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable

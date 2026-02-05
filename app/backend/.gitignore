@@ -14,3 +14,6 @@ coverage/
 #logs e arquivos de Sistema
 *.log
 .DS_Store.env
+
+#etapas do desenvolvimento
+ETAPAS_DEV.md

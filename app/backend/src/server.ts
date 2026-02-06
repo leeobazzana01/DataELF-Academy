@@ -1,32 +1,29 @@
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
+import routes from './routes'; // Importa o index.ts que acabamos de criar
 
-//variaveis de ambiente
+// Carrega variáveis de ambiente
 dotenv.config();
 
 const app = express();
 
-//configs basicas
-app.use(cors()); //liberando acesso externo
-app.use(express.json()); //permite receber json no corpo da req
+// Configurações
+app.use(cors()); // Permite conexão com o Frontend
+app.use(express.json()); // Permite leitura de JSON
 
-//rota de teste
+// Rota de Health Check (para ver se está vivo)
 app.get('/', (req, res) => {
-  res.json({ 
-    status: 'Running', 
-    message: 'Backend DataElf operando! O Robô está pronto.',
-    timestamp: new Date()
-  });
+  res.json({ status: 'DataElf Backend Online 🤖' });
 });
 
-//porta
+// Conecta o Hub de Rotas na URL /api
+// Ex: /api/books, /api/auth/login
+app.use('/api', routes);
+
 const PORT = process.env.PORT || 3001;
 
 app.listen(PORT, () => {
-  console.log(`
-  Servidor Iniciado!
-  URL: http://localhost:${PORT}
-  Modo: Desenvolvimento
-  `);
+  console.log(`\n Servidor rodando em: http://localhost:${PORT}`);
+  console.log(`Autenticação ativa.`);
 });

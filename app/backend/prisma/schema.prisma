@@ -76,6 +76,8 @@ model Chapter {
 model User {
   id        String   @id @default(uuid())
   email     String   @unique
+  name      String   // NOVO
+  password  String   // NOVO: Será o hash, não o texto puro
   createdAt DateTime @default(now())
   progress  UserProgress[]
 }

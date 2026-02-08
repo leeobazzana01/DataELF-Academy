@@ -35,6 +35,8 @@ model Concept {
 model Book {
   //slugs
   id            String   @id 
+
+  order         Int
   
   title         String
   author        String?  //opcional pq as categorias de projetos não tem autor

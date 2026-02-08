@@ -14,6 +14,7 @@ CREATE TABLE "Concept" (
 -- CreateTable
 CREATE TABLE "Book" (
     "id" TEXT NOT NULL,
+    "order" INTEGER NOT NULL,
     "title" TEXT NOT NULL,
     "author" TEXT,
     "emoji" TEXT,
@@ -40,6 +41,8 @@ CREATE TABLE "Chapter" (
 CREATE TABLE "User" (
     "id" TEXT NOT NULL,
     "email" TEXT NOT NULL,
+    "name" TEXT NOT NULL,
+    "password" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "User_pkey" PRIMARY KEY ("id")

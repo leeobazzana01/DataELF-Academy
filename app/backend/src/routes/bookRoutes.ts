@@ -1,13 +1,27 @@
 import { Router } from 'express';
-import { getBooks } from '../controllers/BookController';
-import { handleRobotAction } from '../controllers/RobotControllers';
+import { 
+  getBooksByConcept, 
+  getBookDetails, 
+  toggleChapterProgress 
+} from '../controllers/BookController';
 
 const router = Router();
 
-//rota p pegar os livros (GET)
-router.get('/books', getBooks);
+// ==========================================
+// 📖 ROTAS DE LEITURA (GET)
+// ==========================================
 
-//rota pra falar c o robô (POST)
-router.post('/robot', handleRobotAction);
+// 1. Rota exata que o frontend busca: /concepts/:id/books
+// IMPORTANTE: Isso cria a URL /api/concepts/math/books
+router.get('/concepts/:conceptId/books', getBooksByConcept);
+
+// 2. Rota para os detalhes: /books/:id
+router.get('/books/:bookId', getBookDetails);
+
+// ==========================================
+// ✍️ ROTAS DE ESCRITA (POST)
+// ==========================================
+
+router.post('/progress', toggleChapterProgress);
 
 export default router;
